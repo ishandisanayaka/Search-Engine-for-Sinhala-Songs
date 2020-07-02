@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pacifico">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <title>Search</title>
+
+  </head>
+  <body>
+
+  <div class="container">
+    <div style="background:transparent !important" class="jumbotron">
+      <div style="font-family: 'Pacifico', cursive;">
+        <p>
+          <center>
+          <font size="8">Sinhala Song Collection</font>
+          </center>
+        </p>
+      </div>
+    </div>
+
+  <form action="/search/results" method="post">
+    <div class="input-group">
+      <input type="text" class="form-control input-lg" name="input" placeholder="Search"  autofocus>
+      <div class="input-group-btn">
+        <button class="btn btn-primary btn-lg" type="submit">
+          <i class="glyphicon glyphicon-search"></i>
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <center>
+      <h1> </h1>
+  </center>
+
+  <table class="table">
+    <thead>
+      <tr>
+<!--        <th>Date Stamp</th>-->
+        <th>ID</th>
+<!--        <th>Title</th>-->
+        <th>Album</th>
+        <th>Artist</th>
+        <th>Artist Rating</th>
+          <th>Song</th>
+          <th>Song Rating</th>
+        <th>Lyrics</th>
+
+      </tr>
+    </thead>
+
+{% for hit in res['hits']['hits'] %}
+    <tbody>
+      <tr>
+        <td>{{ hit['_source']['track_id'] }}</td>
+
+          <td>{{ hit['_source']['album_name_si'] }}</td>
+        <td>{{ hit['_source']['artist_name_si'] }}</td>
+        <td>{{ hit['_source']['artist_rating'] }}</td>
+          <td>{{ hit['_source']['track_name_si'] }}</td>
+          <td>{{ hit['_source']['track_rating'] }}</td>
+        <td>{{ hit['_source']['lyrics'] }}</td>
+      </tr>
+    </tbody>
+{% endfor %}
+  </table>
+
+
+      </div>
+    </div>
+  </body>
+</html>
